@@ -35,6 +35,25 @@
         }
     }
 
+
+    class vehicle {
+        public $name;
+        public $color;
+        public $model;
+
+        public function __construct($n, $c, $m) {
+            $this->name = $n;
+            $this->color = $c;
+            $this->model = $m;
+        }
+
+        public function display() {
+            echo "<p>Vehicle Name: $this->name</p>";
+            echo "<p>Vehicle Color: $this->color</p>";
+            echo "<p>Vehicle Model: $this->model</p>";
+        }
+    }
+
     ?>
 </body>
 </html>

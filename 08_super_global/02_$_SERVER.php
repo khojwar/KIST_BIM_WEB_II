@@ -8,7 +8,6 @@ echo "<br>";
 echo $_SERVER['HTTP_USER_AGENT'];
 echo "<br>";
 echo $_SERVER['SCRIPT_NAME'];
-echo "<br>
-
+echo "<br>";
 
 ?>
