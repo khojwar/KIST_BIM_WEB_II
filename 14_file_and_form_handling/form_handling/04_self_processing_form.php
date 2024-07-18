@@ -9,6 +9,7 @@
 <body>
     <main>
         <?php if ($_SERVER['REQUEST_METHOD'] === 'GET') : ?>
+            <!-- This block runs when the request method is GET, displaying the form -->
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <div>
                     <label for="name">Name:</label>
@@ -24,8 +25,9 @@
 
             </form>
         <?php else : ?>
-
+            <!-- This block runs when the request method is POST, processing the form data -->
             <?php
+
             //---------------------------------------------
             // WARNING: this doesn't include sanitization
             // and validation
@@ -35,6 +37,7 @@
                 $email = htmlspecialchars($_POST['email']);
 
                 // show the $name and $email
+                echo $_SERVER['REQUEST_METHOD'] . "<br>";
                 echo "Thanks $name for your subscription.<br>";
                 echo "Please confirm it in your inbox of the email $email.";
             } else {

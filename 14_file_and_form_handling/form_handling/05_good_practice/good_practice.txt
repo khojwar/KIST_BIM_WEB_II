@@ -1,0 +1,121 @@
+However, mixing PHP & HTML is not always a good practice.
+To make the code more organized, you can create the following file & directory structure:
+.
+├── css
+│   └── style.css
+├── inc
+│   ├── header.php
+│   ├── footer.php
+│   ├── get.php
+│   ├── post.php
+│   └── .htaccess      
+└── index.php
+
+
+The index.php file in the root directory will include the header.php and footer.php.
+If the request method is GET, the index.php file loads the form in the get.php file. Otherwise, it loads the code from the post.php file for processing the POST request.
+
+******** index.php ***********
+The following shows the index.php file:
+    <?php
+
+    require __DIR__ . '/inc/header.php';
+
+    $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
+
+    if ($request_method === 'GET') {
+        require __DIR__ . '/inc/get.php';
+    } elseif ($request_method === 'POST') {
+        require __DIR__ .  '/inc/post.php';
+    }
+
+    require __DIR__ .  '/inc/footer.php';
+
+*********** header.php **************
+The header.php contain the first part of the page:
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <title>PHP Form</title>
+    </head>
+    <body>
+        <main>
+
+
+********* footer.php ***********
+The footer.php file contains the enclosing tags of the page:
+
+    </main>
+    </body>
+
+    </html>
+
+
+******** get.php **************
+The get.php file contains the form. The $_SERVER['PHP_SELF'] returns the file name of the currently executing script.
+
+For example, if the executing script is https://www.phptutorial.net/app/form/index.php, the $_SERVER['PHP_SELF'] returns /app/form/index.php.
+
+However, the $_SERVER['PHP_SELF'] cannot be trusted since and it’s vulnerable to XSS attacks. Therefore, you should always escape it using the htmlspecialchars() function.
+
+The following shows the get.php file:
+
+    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" placeholder="Enter your name" />
+        </div>
+
+        <div>
+            <label for="name">Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" />
+        </div>
+
+        <div>
+            <button type="submit">Subscribe</button>
+        </div>
+    </form>
+
+
+********* post.php ************
+The following shows the post.php file that handles the form submission:
+
+    <?php
+
+    //-----------------------------------------------------
+    // WARNING: this doesn't include sanitization
+    // and validation
+    //-----------------------------------------------------
+
+    if (isset($_POST['name'], $_POST['email')) {
+        $name = htmlspecialchars($_POST['name']);
+        $email = htmlspecialchars($_POST['email']);
+
+        // show the $name and $email
+        echo "Thanks $name for your subscription.<br>";
+        echo "Please confirm it in your inbox of the email $email.";
+    } else {
+        echo 'You need to provide your name and email address.';
+    }
+
+
+********* .htaccess **************
+The .htaccess file prevents direct access to the files in the inc directory. It’s relevant only to the Apache webserver.
+
+    Deny from all
+
+
+By using the .htaccess file, you cannot browse the file directly from the inc folder. For example: https://www.phptutorial.net/app/form/inc/get.php
+
+Here’s the final version of the form.
+
+## Summary
+    1. Use the <form> tag to create an HTML form.
+    2. Specify the URL that processes the form submission in the action attribute.
+    3. Use either GET or POST method for the method attribute of the form for submission.
+    4. Use the $_GET or $_POST to access the form data.
+    5. Use the htmlspecialchars() function to escape the user input before showing it on a webpage.
