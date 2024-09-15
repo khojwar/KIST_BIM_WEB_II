@@ -1,0 +1,15 @@
+<?php
+
+include 'db.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "DELETE FROM users WHERE id = $id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully. That is ". $id . ".";
+        echo '<a href="./read.php">User List</a> ';
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}

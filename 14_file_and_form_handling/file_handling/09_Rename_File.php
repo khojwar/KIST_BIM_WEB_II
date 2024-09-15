@@ -1,6 +1,4 @@
 <?php
-
-
 // syntax
 // rename ( string $oldname , string $newname , resource $context = ? ) : bool
 
@@ -8,8 +6,40 @@
 // 1) Simple PHP rename file example
 // The following example uses the rename() function to rename the readme.txt file to readme_v2.txt file in the same directory:
 
-$oldname = 'readme.txt';
-$newname = 'readme_v2.txt';
+
+// // Define the old and new filenames
+// $oldname = 'readme1.txt';
+// $newname = 'readme_v2.txt';
+
+// // Attempt to rename the file
+// if (rename($oldname, $newname)) {
+//     // If successful, create a success message
+//     $message = sprintf(
+//         'The file %s was renamed to %s successfully!',
+//         $oldname,
+//         $newname
+//     );
+// } else {
+//     // If there is an error, create an error message
+//     $message = sprintf(
+//         'There was an error renaming the file %s',
+//         $oldname
+//     );
+// }
+
+// // Output the message
+// echo $message;
+
+
+
+
+
+
+// 2) Rename and move the file
+// The following example uses the rename() function to move the readme.txt to the public directory and rename it to readme_v3.txt:
+
+$oldname = 'readme_v2.txt';
+$newname = 'public/readme_v3.txt';
 
 if (rename($oldname, $newname)) {
 	$message = sprintf(
@@ -25,31 +55,6 @@ if (rename($oldname, $newname)) {
 }
 
 echo $message;
-
-
-
-
-
-// 2) Rename and move the file
-// The following example uses the rename() function to move the readme.txt to the public directory and rename it to readme_v3.txt:
-
-// $oldname = 'readme_v2.txt';
-// $newname = 'public/readme_v3.txt';
-
-// if (rename($oldname, $newname)) {
-// 	$message = sprintf(
-// 		'The file %s was renamed to %s successfully!',
-// 		$oldname,
-// 		$newname
-// 	);
-// } else {
-// 	$message = sprintf(
-// 		'There was an error renaming file %s',
-// 		$oldname
-// 	);
-// }
-
-// echo $message;
 
 
 

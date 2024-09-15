@@ -18,6 +18,20 @@ form {
     width: 300px;
 }
 
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+header p {
+    margin: 10px 0 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
 div {
     margin-bottom: 15px;
 }
@@ -28,13 +42,21 @@ label {
     font-weight: bold;
 }
 
-input[type="text"],
-input[type="email"] {
+input[type="text"] {
     width: calc(100% - 22px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input[type="text"].error {
+    border-color: red;
+}
+
+small {
+    color: red;
+    font-size: 12px;
 }
 
 button {

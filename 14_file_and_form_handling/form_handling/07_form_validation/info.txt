@@ -1,0 +1,83 @@
+PHP form validation example
+We’ll build an email subscription form that includes a validation feature. The form has the name and email input elements and a submit button:
+
+PHP form validation
+If you don’t enter the name and/or email and click the subscribe button, the form will show the error messages. Also, if you enter an invalid email address, the form will show a different error message.
+
+Notice that we don’t use the client-side validation for this form to make it easier to test. In practice, you should also use client-side validation.
+
+Organize the directory and files
+First, create a file and directory structure as follows:
+
+.
+├── css
+│   └── style.css
+├── inc
+│   ├── get.php
+│   ├── post.php
+│   ├── header.php
+│   ├── footer.php
+│   └── .htaccess
+└── index.php
+
+
+
+
+
+**** How it works. ******
+
+First, define some constants to store the error messages. In a real-world application, you can store all the messages in a separate file:
+
+const NAME_REQUIRED = 'Please enter your name';
+const EMAIL_REQUIRED = 'Please enter your email';
+const EMAIL_INVALID = 'Please enter a valid email';
+Code language: JavaScript (javascript)
+Second, sanitize and validate the name using the filter_input() function. If the name is empty, add an error message to the $errors array.
+
+// sanitize and validate name
+$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+$inputs['name'] = $name;
+
+if ($name) {
+    $name = trim($name);
+    if ($name === '') {
+        $errors['name'] = NAME_REQUIRED;
+    }
+} else {
+    $errors['name'] = NAME_REQUIRED;
+}
+Code language: PHP (php)
+Third, sanitize and validate email using the filter_input() and filter_var() functions. If the email is empty or invalid, add the corresponding error message to the $errors array.
+
+// sanitize & validate email
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$inputs['email'] = $email;
+if ($email) {
+    // validate email
+    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+    if ($email === false) {
+        $errors['email'] = EMAIL_INVALID;
+    }
+} else {
+    $errors['email'] = EMAIL_REQUIRED;
+}
+Code language: PHP (php)
+Finally, if the form has no error, show the confirmation message:
+
+<?php if (count($errors) === 0) : ?>
+    <section>
+        <h2>
+            Thanks <?php echo htmlspecialchars($name) ?> for your subscription!
+        </h2>
+        <p>Please follow the steps below to complete your subscription:</p>
+        <ol>
+            <li>Check your email (<?php echo htmlspecialchars($email) ?>) - Find the message sent from webmaster@phptutorial.net</li>
+            <li>Click to confirm - Click on the link in the email to confirm your subscription.</li>
+        </ol>
+    </section>
+<?php endif ?>
+Code language: HTML, XML (xml)
+To complete the form, you can save the contact data to a database or call an API of an email marketing service to add the contact to your list.
+
+Summary
+Use filter_input() and filter_var() functions to validate and sanitize data.

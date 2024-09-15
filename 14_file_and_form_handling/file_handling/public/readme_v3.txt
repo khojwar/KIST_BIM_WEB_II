@@ -1,4 +1,3 @@
-<h1> Hello BIM </h1>
-
-The Bachelor of Information Management (BIM) is an interdisciplinary academic program that combines principles of information technology (IT) with management practices. <br> 
-This degree aims to equip students with the necessary skills to manage information systems effectively within organizations.
+Education is crucial for personal empowerment, societal development, and economic growth. 
+It fosters critical thinking, innovation, and the ability to adapt to changing environments. 
+By promoting knowledge and understanding, education helps build a more informed and equitable society.

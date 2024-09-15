@@ -1,0 +1,8 @@
+# Redirect requests to index.php by default
+DirectoryIndex index.php
+
+# Block direct access to PHP files in the auth directory
+<FilesMatch "auth.php">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
